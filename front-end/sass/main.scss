@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0 10px;
+}
+
+img.header__logo {
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.navbar {
+    margin-bottom: 15px;
+}
+
+.login {
+    margin-right: 30px;
+}
+
+//main
+main {
+    background: url(../img/image_fond.jpg) no-repeat 50% 0% fixed;
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+}
+
+//footer
+.copyright.text-center {
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 17, 17);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 599px) and (min-width: 300px) {
+    .header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 30px;
+        width: 100%;
+    }
+}
