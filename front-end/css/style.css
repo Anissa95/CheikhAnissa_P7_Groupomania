@@ -49,5 +49,59 @@ main {
     width: 100%;
   }
 }
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.card {
+  width: 540px;
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.from-row {
+  display: flex;
+  margin: 16px 0px;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.from-row p {
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.form-row_input {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #f2f2f2;
+  font-weight: 500;
+  font-size: 16px;
+  flex: 1;
+  min-width: 100px;
+  color: black;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn {
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  width: 100%;
+  padding: 16px;
+  transition: 0.4s background-color;
+}
 
 /*# sourceMappingURL=style.css.map */
