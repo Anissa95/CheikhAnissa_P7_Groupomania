@@ -1,3 +1,9 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -16,11 +22,27 @@ img.header__logo {
   margin-bottom: 15px;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: black;
+  margin-right: 20px;
+}
+
 .login {
   margin-right: 30px;
 }
 
+hr {
+  margin: 0;
+}
+
 main {
+  min-height: 500px;
+  width: 100%;
+  background: cornsilk;
+}
+
+#main {
   background: url(../img/image_fond.jpg) no-repeat 50% 0% fixed;
   height: 500px;
   width: 100%;
@@ -35,20 +57,6 @@ main {
   font-size: 20px;
 }
 
-@media screen and (max-width: 599px) and (min-width: 300px) {
-  .header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 30px;
-    width: 100%;
-  }
-}
 .container {
   display: flex;
   align-items: center;
@@ -57,19 +65,20 @@ main {
 }
 
 .card {
-  width: 540px;
+  width: 400px;
   background: white;
   border-radius: 16px;
-  padding: 32px;
+  padding: 16px;
   box-sizing: border-box;
+  margin-top: 20px;
 }
 
-.from-row {
+.form-row {
   display: flex;
   margin: 16px 0px;
   gap: 16px;
   flex-wrap: wrap;
-  flex-direction: column;
+  justify-content: center;
 }
 
 .from-row p {
@@ -90,7 +99,14 @@ main {
   min-width: 100px;
   color: black;
   width: 100%;
-  margin-bottom: 20px;
+}
+
+.form-row_label {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: black;
 }
 
 .btn {
@@ -100,8 +116,53 @@ main {
   font-size: 18px;
   border: none;
   width: 100%;
-  padding: 16px;
+  padding: 10px;
   transition: 0.4s background-color;
+}
+
+button {
+  border-radius: 8px;
+}
+
+.form-row_text {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #f2f2f2;
+  font-weight: 500;
+  font-size: 16px;
+  flex: 1;
+  min-width: 100px;
+  color: black;
+}
+
+.btn-post {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  min-width: 100px;
+  color: black;
+  color: #ec8884;
+}
+
+@media screen and (max-width: 599px) and (min-width: 300px) {
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px;
+    width: 100%;
+  }
+
+  .card {
+    width: 300px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
