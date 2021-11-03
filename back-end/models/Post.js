@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             },
 
             message: {
-                type: Sequelize.STRING(200),
+                type: Sequelize.STRING(2000),
                 allowNull: false,
                 defaultValue: "",
             },

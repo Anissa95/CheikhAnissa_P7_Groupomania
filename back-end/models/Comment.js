@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
-    const Comments = sequelize.define(
-        "Comments", {
+    const Comment = sequelize.define(
+        "Comment", {
             postId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
 
             comment: {
-                type: Sequelize.STRING(250),
+                type: Sequelize.STRING(2000),
                 allowNull: false,
                 defaultValue: "",
             },
@@ -18,5 +18,5 @@ module.exports = (sequelize, Sequelize) => {
         },
     );
 
-    return Comments;
+    return Comment;
 };
