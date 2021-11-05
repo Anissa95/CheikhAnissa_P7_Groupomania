@@ -1,6 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const Comment = sequelize.define(
-        "Comment", {
+        "comment", {
+            author: {
+                type: Sequelize.STRING(50),
+                allowNull: false,
+                defaultValue: "",
+            },
+            authorId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
             postId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -11,10 +20,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
                 defaultValue: "",
             },
-            dateComment: {
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW
-            }
+
         },
     );
 

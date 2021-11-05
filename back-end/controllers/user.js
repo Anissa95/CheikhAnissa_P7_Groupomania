@@ -4,17 +4,16 @@ require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const db = require("../models");
 const fs = require("fs");
-const op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;
 
 // Enregistrement d'un nouveau utilisateur
 exports.signup = (req, res, next) => {
-    const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
     bcrypt
         .hash(req.body.password, 10)
         .then((hash) => {
             const user = {
                 username: req.body.username,
-                email: emailCryptoJs,
+                email: req.body.email,
                 password: hash,
                 isAdmin: false,
             };
@@ -28,9 +27,8 @@ exports.signup = (req, res, next) => {
 
 // Connecxion d'un utilisateur existant
 exports.login = (req, res, next) => {
-    const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
     db.user
-        .findOne({ where: { email: emailCryptoJs } })
+        .findOne({ where: { email: req.body.email } })
         .then((user) => {
             if (!user) {
                 return res.status(401).json({ error: "Utilisateur non trouvé !" });
@@ -45,7 +43,7 @@ exports.login = (req, res, next) => {
                     return res.status(200).json({
                         userId: user.id,
                         isAdmin: user.isAdmin,
-                        token: jwt.sign({ userId: user.id }, process.env.TOKEN_KEY, {
+                        token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
                             expiresIn: "1h",
                         }),
                     });

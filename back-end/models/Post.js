@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Post = sequelize.define(
-        "Post", {
+        "post", {
             userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -10,7 +10,11 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
                 defaultValue: "",
             },
-
+            username: {
+                type: Sequelize.STRING(50),
+                allowNull: false,
+                defaultValue: "",
+            },
             message: {
                 type: Sequelize.STRING(2000),
                 allowNull: false,
@@ -21,10 +25,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
                 defaultValue: "",
             },
-            datePost: {
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW
-            }
+
         }
     );
 

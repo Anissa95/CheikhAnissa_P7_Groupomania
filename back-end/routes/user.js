@@ -7,7 +7,6 @@ router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 router.get("/admin", userCtrl.getAdmin);
 router.get("/user", userCtrl.findUser);
-router.get('/users', auth, userCtrl.findAllUsers);
 router.delete("/user", userCtrl.deleteUser);
 
 module.exports = router;

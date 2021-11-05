@@ -2,7 +2,7 @@
 const Sequelize = require("sequelize");
 
 // Etablir la cnx avec la BD mysql
-const sequelize = new Sequelize("groupomanianissa", "root", "", {
+const sequelize = new Sequelize("groupomania", "root", "Louise2019*", {
     host: "localhost",
     dialect: "mysql",
 });
