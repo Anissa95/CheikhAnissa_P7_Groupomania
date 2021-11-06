@@ -3,25 +3,43 @@
     <nav class="navbar">
       <div class="container-fluid position">
         <a class="navbar-brand" @click="goToHome">
-          <div
-            class="logo">
-      <img
-        alt="logo du réseau groupomania"
-        src="../assets/icon-above-font.svg"
-      /></div>
+          <div class="logo">
+            <img
+              alt="logo du réseau groupomania"
+              src="../assets/icon-above-font.svg"
+            />
+          </div>
         </a>
         <ul>
-        <li>
-           <a  @click="goToProfilPage" title="Profile" class="fas fa-user-circle"></a>
-        </li>
-        <li>
-           <a @click="goToAdminsPage" title="Administrateur" class="fas fa-user-cog"></a>
-        </li>
-        <li>
-           <a  @click="signout" title="Se déconnecter" class="fas fa-sign-in-alt"></a>
-        </li>
+          <li>
+            <a
+              @click="goToProfilPage"
+              title="Profile"
+              class="fas fa-user-circle"
+            ></a>
+          </li>
+          <li>
+            <a
+              @click="goToWall"
+              title="Actualite"
+              class="far fa-edit"
+            ></a>
+          </li>
+          <li>
+            <a
+              @click="goToAdminsPage"
+              title="Administrateur"
+              class="fas fa-user-cog"
+            ></a>
+          </li>
+          <li>
+            <a
+              @click="signout"
+              title="Se déconnecter"
+              class="fas fa-sign-in-alt"
+            ></a>
+          </li>
         </ul>
-        
       </div>
     </nav>
   </div>
@@ -30,10 +48,16 @@
 <script>
 export default {
   name: "Nav",
- 
-  
-  
-};
+
+   methods: {
+    goToProfilPage() {
+      this.$router.push("Profile");
+    },
+    
+    goToWall() {
+      this.$router.push("Actualite");
+    },}
+}
 </script>
 
 <style lang="scss">
@@ -46,12 +70,12 @@ export default {
   position: sticky;
   top: 0;
 }
-    .navbar {
+.navbar {
   position: relative;
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   background: white;
   padding: 0;
 }
@@ -60,7 +84,7 @@ ul {
   list-style: none;
   padding: 0;
   width: 250px;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 a {
@@ -74,5 +98,4 @@ a {
 a:hover {
   color: grey;
 }
-
 </style>

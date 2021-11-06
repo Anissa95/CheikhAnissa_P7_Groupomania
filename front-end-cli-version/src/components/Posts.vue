@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <div class="btn-style">
-      <button type="button" class="btn btn-primary" @click="goToAddPage">
+    <div class="button">
+      <button
+        type="button"
+        title="Ecrire un post"
+        class="far fa-edit post"
+        @click="goToAddPage"
+      >
         Ajouter post
       </button>
     </div>
@@ -19,9 +24,9 @@
                 <div class="edit-comment mb-3 style-div">
                   <div
                     v-bind:id="`comment-${comment.id}`"
-                    style="display:flex;"
+                    style="display: flex"
                   >
-                    <div style="margin-right:6px">{{ comment.author }}:</div>
+                    <div style="margin-right: 6px">{{ comment.author }}:</div>
                     <div>{{ comment.comment }}</div>
                   </div>
                   <div class="input-group">
@@ -31,14 +36,14 @@
                       class="form-control"
                       name="commentaire"
                       placeholder="Ecrivez un commentaire"
-                      style="display:none"
+                      style="display: none"
                     />
                     <button
                       v-bind:id="`comment-${comment.id}-edit-button`"
                       class="btn btn-outline-secondary"
                       type="button"
                       @click="editComment(comment.id)"
-                      style="display:none"
+                      style="display: none"
                     >
                       Envoyer
                     </button>
@@ -98,7 +103,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: "Posts",
   data() {
@@ -107,12 +111,14 @@ export default {
       comments: [],
     };
   },
-}
+  methods: {
+    goToAddPage() {
+      this.$router.push("AddPost");
+    },
+  },
+};
 </script>
 <style lang="scss">
-
-
-
 .style-div {
   display: flex;
   align-items: center;
@@ -121,9 +127,13 @@ export default {
 .card-style {
   margin-bottom: 20px;
 }
-.btn-style {
-  align-self: flex-end;
-  margin: 16px;
+.far.fa-edit.post{
+   border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  width: 100%;
+  padding: 10px;
 }
 .style-icon {
   cursor: pointer;

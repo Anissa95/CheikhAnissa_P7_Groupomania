@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="card">
-      <h1>Profil</h1>
+      <h1 class="card-title">Profil</h1>
       <div>
         <ul class="list-group ">
           <li class="list-group-item margin">

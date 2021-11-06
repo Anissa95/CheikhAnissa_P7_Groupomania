@@ -4,7 +4,7 @@
     <div class="container">
       <form id="formPost" class="card">
         <div class="header-box">
-          <h1>Nouveau Post</h1>
+          <h1 class="card-title">Nouveau Post</h1>
         </div>
         <div v-if="image != ''" class="image-block">
           <img :src="image" />
@@ -73,6 +73,13 @@ export default {
 <style lang="scss">
 .validPost {
   margin-left: 10px;
+   border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+
 }
 #input-image {
   display: none;
