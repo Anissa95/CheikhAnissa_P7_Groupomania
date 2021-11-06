@@ -2,7 +2,8 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid position">
-        <a class="navbar-brand" @click="goToHome">
+        <a class="navbar-brand" @click="goToWall"
+              title="Actualite">
           <div class="logo">
             <img
               alt="logo du réseau groupomania"
@@ -16,13 +17,6 @@
               @click="goToProfilPage"
               title="Profile"
               class="fas fa-user-circle"
-            ></a>
-          </li>
-          <li>
-            <a
-              @click="goToWall"
-              title="Actualite"
-              class="far fa-edit"
             ></a>
           </li>
           <li>
