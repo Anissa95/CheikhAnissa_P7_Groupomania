@@ -58,14 +58,43 @@ exports.deleteUser = (req, res, next) => {
 };
 //Afficher l'administrateur
 exports.getAdmin = (req, res, next) => {
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const userId = decodedToken.userId;
+    db.user
+        .findOne({
+            attributes: ["isAdmin"],
+            where: { id: userId },
+        })
+        .then((user) => {
+            if (user.dataValues.isAdmin == "1") {
+                db.user
+                    .findAll({
+                        where: { isAdmin: "1" },
+                    })
+                    .then((users) => {
+                        res.status(200).json({ users });
+                    })
+                    .catch((error) => res.status(500).json({ error }));
+            } else {
+                throw new Error("unauthorized");
+            }
+        })
+        .catch((error) => res.status(500).json({ error }));
 
 };
 //Trouver un user 
 exports.findUser = (req, res, next) => {
-
-};
-//Récuperer tous les utilisateurs
-exports.findAllUsers = (req, res, next) => {
-
-
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const userId = decodedToken.userId;
+    db.user
+        .findOne({
+            attributes: ["username", "email", "id", "isAdmin"],
+            where: { id: userId },
+        })
+        .then((user) => {
+            res.status(200).json({ user });
+        })
+        .catch((error) => res.status(500).json({ error }));
 };
