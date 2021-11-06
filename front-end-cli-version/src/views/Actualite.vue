@@ -1,9 +1,19 @@
 <template>
-    <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  
+    <Posts />
+  
 </template>
 
+<script>
+
+import Posts from "../components/Posts.vue";
+export default {
+  name: "Actualite",
+  components: {
+    Posts,
+  },
+};
+</script>
 <style lang="sass">
 
 </style>

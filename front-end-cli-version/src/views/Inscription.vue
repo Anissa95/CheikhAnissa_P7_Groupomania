@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div class="logo">
+    <!--div class="logo">
       <img
         alt="logo du réseau groupomania"
         src="../assets/icon-above-font.svg"
       />
-    </div>
+    </div-->
     <div class="container">
     <div class="card">
       <div class="card-body">

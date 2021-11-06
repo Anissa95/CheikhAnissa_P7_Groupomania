@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -10,7 +9,6 @@ const commentRoutes = require("./routes/comment");
 const db = require("./models");
 
 const app = express();
-app.use(helmet());
 // Configuration cors
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

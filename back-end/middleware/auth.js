@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 //Importation pour l'utilisation des variables d'environnements
-
+require('dotenv').config();
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

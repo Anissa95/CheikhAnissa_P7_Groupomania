@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div class="logo">
+    <!--div class="logo">
       <img
         alt="logo du réseau groupomania"
         src="../assets/icon-above-font.svg"
       />
-    </div>
+    </div-->
     <div class="container">
       <div class="card">
         <div class="card-body">
@@ -53,7 +53,7 @@
 <script>
 import { login } from "../services/user";
 export default {
- name: "connect-user",
+  name: "connect-user",
   data() {
     return {
       user: {
@@ -71,13 +71,33 @@ export default {
         email: this.user.email,
         password: this.user.password,
       };
-      login(data)
-        .then(() => {
-          this.$router.push("Actualite"); //push() pour la redirection vers la page Home
-        })
-        .catch((err) => console.log(err));
-    },goToRegister() {
+      const isformValid = this.validForm();
+      if (isformValid) {
+        login(data)
+          .then((response) => {
+            localStorage.setItem("token", response.data.token);
+            this.$store.state.user.isAdmin = response.data.isAdmin;
+            this.$store.state.user.userId = response.data.userId;
+            this.$store.state.user.islogged = true;
+            this.$router.push("/Actualite"); //push() pour la redirection vers la page Home
+          })
+          .catch(() => alert("email ou mot de passe incorrect"));
+      } else {
+        alert("error");
+      }
+    },
+    goToRegister() {
       this.$router.push("/inscription");
+    },
+    validForm() {
+      let emailRegExp = new RegExp(
+        "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
+        "g"
+      );
+      // tester l'expression regex
+      let testEmail = emailRegExp.test(this.user.email);
+      let testPassword = this.user.password.length > 0;
+      return testEmail && testPassword;
     },
   },
 };
