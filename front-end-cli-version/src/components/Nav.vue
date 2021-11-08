@@ -13,21 +13,22 @@
         </a>
         <ul>
           <li>
-            <a
+            <a  
               @click="goToProfilPage"
               title="Profile"
               class="fas fa-user-circle"
+              
             ></a>
           </li>
           <li>
-            <a
+            <a  v-if="isAdmin === true"
               @click="goToAdminsPage"
               title="Administrateur"
               class="fas fa-user-cog"
             ></a>
           </li>
           <li>
-            <a
+            <a 
               @click="signout"
               title="Se déconnecter"
               class="fas fa-sign-in-alt"
@@ -50,17 +51,18 @@ export default {
     
     goToWall() {
       this.$router.push("Actualite");
-    },}
-}
+    },
+    signout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("userId");
+      this.$router.push("/login");
+    },
+}}
 </script>
 
 <style lang="scss">
 .position {
-  position: sticky;
-  top: 0;
-}
-.navStyle {
-  background-color: #181f44;
   position: sticky;
   top: 0;
 }

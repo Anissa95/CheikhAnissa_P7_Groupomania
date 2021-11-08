@@ -5,6 +5,16 @@ import Actualite from '../views/Actualite.vue'
 import AddPost from "../components/AddPost.vue";
 import EditPost from "../components/EditPost.vue";
 import Profile from "../views/Profile.vue";
+
+// pour garder la session ouverte de l'utilisateur, on crée authenticate pour verifier la présence ou pas du token dans localstorage
+const authenticate = (to, from, next) => {
+
+
+    if (localStorage.getItem("token")) {
+        next();
+    } else next("/login");
+};
+
 const routes = [{
         path: '/',
         name: 'Login',
@@ -17,22 +27,26 @@ const routes = [{
     }, {
         path: '/Actualite',
         name: 'Actualite',
-        component: Actualite
+        component: Actualite,
+        beforeEnter: authenticate,
     },
     {
         path: "/addPost",
         name: "AddPost",
         component: AddPost,
+        beforeEnter: authenticate,
     },
     {
         path: "/post/:id",
         name: "EditPost",
-        component: EditPost
+        component: EditPost,
+        beforeEnter: authenticate,
     },
     {
         path: "/profile",
         name: "Profile",
-        component: Profile
+        component: Profile,
+        beforeEnter: authenticate,
     }
 ]
 

@@ -50,7 +50,7 @@
       </button>
         <div class="form-row">
         <p class="card-subtitle">Tu as déjà un compte</p>
-         <router-link to="/" id="routerLink">Se connecter</router-link>
+         <router-link to="/" id="routerLink" class="btn btn-primary btn-props">Se connecter</router-link>
          </div>
       </div>
     </div>
@@ -72,21 +72,42 @@ export default {
         password: "",
         published: false,
       },
-      submitted: false,
+      alertMsg: "",
     };
   },
+  
   methods: {
+    // Verification des inputs username, email et MDP lors de l'inscription
+    validForm() {
+      let emailRegExp = new RegExp(
+        "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
+        "g"
+      );
+      // tester l'expression regex
+      let testUsername = this.user.username.length > 0;
+      let testEmail = emailRegExp.test(this.user.email);
+      let testPassword = this.user.password.length > 8;
+      console.log({ testEmail, testPassword, testUsername });
+      return testEmail && testPassword && testUsername;
+    },
+    // Enregistrement d'un user
     saveUser() {
       const data = {
         username: this.user.username,
         email: this.user.email,
         password: this.user.password,
       };
-      signup(data)
-        .then(() => {
-          this.$router.push("Actualite");
-        })
-        .catch((err) => console.log(err));
+      const isformValid = this.validForm();
+      if (isformValid) {
+        signup(data)
+          .then(() => {
+            this.$router.push("actualite");
+          })
+          .catch((err) => console.log(err));
+      } else {
+        alert("error");
+      }
+      // pour s'inscrire
     },
     newUser() {
       this.submitted = false;
