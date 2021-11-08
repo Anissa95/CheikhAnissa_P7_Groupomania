@@ -29,16 +29,37 @@
   </div>
 </template>
 <script>
-
+import { deleteUser, getUser } from "../services/user";
 export default {
-  name: "profil",
+  name: "profile",
   data() {
     return {
       user: {},
       password: "",
     };
   },
-}
+  mounted() {
+    getUser().then((response) => {
+      this.user = response.data.user;
+    });
+  },
+  methods: {
+    deleteAccount() {
+      deleteUser(this.password)
+        .then(() => {
+          // on supprime le token du user du loalstorage
+          localStorage.removeItem("token");
+          // on solicite la méhode signout du store
+          this.$store.dispatch("signout").then(() => {
+            // on redirige le user vers la vue Login et un message apparait
+            this.$router.push("Login");
+            alert("compte supprimé");
+          });
+        })
+        .catch((err) => console.log(err));
+    },
+  },
+};
 </script>
 <style lang="scss">
 

@@ -43,7 +43,14 @@
 <script>
 export default {
   name: "Nav",
-
+data() {
+    return {
+      isAdmin: localStorage.getItem("isAdmin"),
+    };
+  },
+  mounted() {
+    console.log(this.isAdmin);
+  },
    methods: {
     goToProfilPage() {
       this.$router.push("Profile");

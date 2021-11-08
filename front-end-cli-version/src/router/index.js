@@ -5,6 +5,7 @@ import Actualite from '../views/Actualite.vue'
 import AddPost from "../components/AddPost.vue";
 import EditPost from "../components/EditPost.vue";
 import Profile from "../views/Profile.vue";
+import Admins from "../views/Admin.vue";
 
 // pour garder la session ouverte de l'utilisateur, on crée authenticate pour verifier la présence ou pas du token dans localstorage
 const authenticate = (to, from, next) => {
@@ -47,7 +48,12 @@ const routes = [{
         name: "Profile",
         component: Profile,
         beforeEnter: authenticate,
-    }
+    }, {
+        path: "/admin",
+        name: "Admin",
+        component: Admins,
+        beforeEnter: authenticate,
+    },
 ]
 
 const router = createRouter({

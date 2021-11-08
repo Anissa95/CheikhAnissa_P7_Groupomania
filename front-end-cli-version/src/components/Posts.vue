@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="button">
       <button
         type="button"
@@ -103,19 +103,46 @@
   </div>
 </template>
 <script>
+import { getAllPost } from "../services/post";
 export default {
   name: "Posts",
   data() {
     return {
       posts: [],
       comments: [],
+      userId: localStorage.getItem("userId"),
+      isAdmin: localStorage.getItem("isAdmin"),
     };
+  },
+  // après que le composant est chargé, on exécute tout ce qui est à l'intérieur de la fct mounted
+  mounted() {
+    getAllPost().then((response) => {
+      this.posts = response.data.result.posts;
+      this.comments = response.data.result.comments;
+    });
+    console.log({ userId: this.userId, isAdmin: this.isAdmin });
   },
   methods: {
     goToAddPage() {
       this.$router.push("AddPost");
     },
   },
+  goToEditPage() {
+      
+    },
+    addComment() {
+      
+    },
+    deleteComment() {
+     
+    },
+    showEdit() {
+      
+    },
+    editComment() {
+      
+    },
+  
 };
 </script>
 <style lang="scss">
@@ -132,7 +159,6 @@ export default {
   font-weight: 600;
   font-size: 18px;
   border: none;
-  width: 100%;
   padding: 10px;
 }
 .style-icon {
