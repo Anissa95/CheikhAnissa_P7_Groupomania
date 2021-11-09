@@ -6,14 +6,29 @@ import AddPost from "../components/AddPost.vue";
 import EditPost from "../components/EditPost.vue";
 import Profile from "../views/Profile.vue";
 import Admins from "../views/Admin.vue";
+import store from "../store";
 
 // pour garder la session ouverte de l'utilisateur, on crée authenticate pour verifier la présence ou pas du token dans localstorage
 const authenticate = (to, from, next) => {
-
+    store.state.user.isLogged = true;
+    // fct pour se déconnecter
+    function logout() {
+        if (localStorage.getItem("token")) {
+            localStorage.removeItem("token");
+        }
+        store.state.user.isLogged = false;
+        next("/");
+    }
+    //  si pas de token on se déconnecte
+    if (!localStorage.getItem("token")) {
+        logout();
+        return;
+    }
+    //  si token on se redirige vers home
 
     if (localStorage.getItem("token")) {
         next();
-    } else next("/login");
+    } else next("/");
 };
 
 const routes = [{

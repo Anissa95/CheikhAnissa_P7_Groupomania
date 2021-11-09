@@ -52,7 +52,7 @@ export default {
           // on solicite la méhode signout du store
           this.$store.dispatch("signout").then(() => {
             // on redirige le user vers la vue Login et un message apparait
-            this.$router.push("Login");
+            this.$router.push("/");
             alert("compte supprimé");
           });
         })

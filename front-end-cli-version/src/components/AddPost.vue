@@ -24,7 +24,7 @@
           <textarea
             v-model="description"
             class="form-control"
-            placeholder="Taper votre message"
+            placeholder="Entrez votre message"
             id="description"
             type="text"
           ></textarea>
@@ -57,7 +57,7 @@
 <script>
 import { createPost } from "../services/post";
 export default {
-  name: "AjoutPost",
+  name: "addPost",
  
   data() {
     return {
@@ -97,7 +97,7 @@ export default {
       createPost(formData)
         .then(() => {
           // pour diriger vers la page home
-          this.$router.push("/Actualite");
+          this.$router.push("Actualite");
         })
         .catch((err) => {
           console.log("Erreur: " + err);

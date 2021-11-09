@@ -21,7 +21,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
+        <label for="description" class="form-label">Message</label>
         <input
           v-model="description"
           class="form-control"

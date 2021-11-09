@@ -1,12 +1,13 @@
 const fs = require("fs");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 // Ajout d'un commentaire
 exports.addComment = (req, res, next) => {
     // Déclaration du token
     const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
     const userId = decodedToken.userId;
     // Récupèrer le user de la BDD 
     db.user
@@ -31,10 +32,78 @@ exports.addComment = (req, res, next) => {
 
 // Modifier un commentaire
 exports.updateComment = (req, res, next) => {
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
+    const userId = decodedToken.userId;
+    db.user
+        .findOne({
+            attributes: ["isAdmin"],
+            where: { id: userId },
+        })
+        .then((user) => {
+            db.comment
+                .findOne({
+                    attributes: ["authorId"],
+                    where: { id: req.params.id },
+                })
+                .then((comment) => {
+                    //verifier si l'utilisateur est admin ou pas
+                    if (
+                        userId == comment.dataValues.authorId ||
+                        user.dataValues.isAdmin == "1"
+                    ) {
+                        const newComment = {
+                            comment: req.body.comment,
+                        };
+                        db.comment
+                            .update(newComment, { where: { id: req.params.id } })
+                            .then(() => {
+                                res.status(201).json({ message: "Commentaire modifié!" });
+                            });
+                    } else {
+                        res.status(401).json({ error: "unauthorized" });
+                    }
+                });
+        })
+        .catch((error) => res.status(500).json({ error }));
 
 };
 
 // Suppression d'un commentaire
 exports.deleteComment = (req, res, next) => {
-
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
+    const userId = decodedToken.userId;
+    // on verifie si user est un admin
+    db.user
+        .findOne({
+            attributes: ["isAdmin"],
+            where: { id: userId },
+        })
+        // ou cherche le créateur de ce comment
+        .then((user) => {
+            db.comment
+                .findOne({
+                    attributes: ["authorId"],
+                    where: { id: req.params.id },
+                })
+                .then((comment) => {
+                    //verifier si l'utilisateur est admin ou pas
+                    if (
+                        userId == comment.dataValues.authorId ||
+                        user.dataValues.isAdmin == "1"
+                    ) {
+                        db.comment
+                            .destroy({
+                                where: { id: req.params.id },
+                            })
+                            .then(() => {
+                                res.status(201).json({ message: "Commentaire supprimé !" });
+                            });
+                    } else {
+                        res.status(401).json({ error: "unauthorized" });
+                    }
+                });
+        })
+        .catch((error) => res.status(500).json({ error }));
 };

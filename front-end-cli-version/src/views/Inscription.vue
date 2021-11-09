@@ -86,7 +86,7 @@ export default {
       // tester l'expression regex
       let testUsername = this.user.username.length > 0;
       let testEmail = emailRegExp.test(this.user.email);
-      let testPassword = this.user.password.length > 8;
+      let testPassword = this.user.password.length > 5;
       console.log({ testEmail, testPassword, testUsername });
       return testEmail && testPassword && testUsername;
     },

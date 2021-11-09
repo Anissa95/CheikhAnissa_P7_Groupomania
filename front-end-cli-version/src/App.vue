@@ -13,6 +13,10 @@ export default {
     Nav
     
   },
+  // on ajoute une condition si token présent dans le localstorage on dispatch la fct getuser qui se trouve dans store
+  mounted() {
+    if (localStorage.getItem("token")) this.$store.dispatch("getUser");
+  },
   
 };
 </script>

@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
                 defaultValue: "",
             },
-            message: {
+            description: {
                 type: Sequelize.STRING(2000),
                 allowNull: false,
                 defaultValue: "",

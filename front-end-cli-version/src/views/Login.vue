@@ -76,9 +76,10 @@ export default {
         login(data)
           .then((response) => {
             localStorage.setItem("token", response.data.token);
-          localStorage.setItem("isAdmin", response.data.isAdmin);
-          localStorage.setItem("userId", response.data.userId);
-            this.$router.push("/Actualite"); //push() pour la redirection vers le mur
+            this.$store.state.user.isAdmin = response.data.isAdmin;
+            this.$store.state.user.userId = response.data.userId;
+            this.$store.state.user.islogged = true;
+            this.$router.push("/actualite"); //push() pour la redirection vers le mur 
           })
           .catch(() => alert("email ou mot de passe incorrect"));
       } else {

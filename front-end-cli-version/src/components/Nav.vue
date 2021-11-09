@@ -13,7 +13,7 @@
         </a>
         <ul>
           <li>
-            <a  
+            <a   v-if="isLogged === true"
               @click="goToProfilPage"
               title="Profile"
               class="fas fa-user-circle"
@@ -21,7 +21,7 @@
             ></a>
           </li>
           <li>
-            <a  v-if="isAdmin === true"
+            <a  v-if="isAdmin === true  && isLogged === true"
               @click="goToAdminsPage"
               title="Administrateur"
               class="fas fa-user-cog"
@@ -29,6 +29,7 @@
           </li>
           <li>
             <a 
+            v-if="isLogged === true"
               @click="signout"
               title="Se déconnecter"
               class="fas fa-sign-in-alt"
@@ -43,29 +44,30 @@
 <script>
 export default {
   name: "Nav",
-data() {
-    return {
-      isAdmin: localStorage.getItem("isAdmin"),
-    };
-  },
-  mounted() {
-    console.log(this.isAdmin);
-  },
-   methods: {
-    goToProfilPage() {
-      this.$router.push("Profile");
+   computed: {
+    isAdmin() {
+      return this.$store.state.user.isAdmin;
     },
-    
-    goToWall() {
-      this.$router.push("Actualite");
+    isLogged() {
+      return this.$store.state.user.isLogged;
+    },
+  },
+  methods: {
+    goToAdminsPage() {
+      this.$router.push("/admin");
     },
     signout() {
       localStorage.removeItem("token");
-      localStorage.removeItem("isAdmin");
-      localStorage.removeItem("userId");
-      this.$router.push("/login");
+      this.$store.dispatch("signout").then(() => this.$router.push("/"));
     },
-}}
+    goToProfilPage() {
+      this.$router.push("Profile");
+    },
+    goToWall() {
+      this.$router.push("actualite");
+    },
+  },
+};
 </script>
 
 <style lang="scss">
