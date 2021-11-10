@@ -1,33 +1,34 @@
 <template>
-  <div class="main">
+  <div class="container">
     <!-- for new post -->
-    <div class="container">
-      <form id="formPost" class="card-post">
-        <div class="header-box">
-          <h1 class="card-title">Nouveau Post</h1>
-        </div>
-        <div v-if="image != ''" class="image-block">
-          <img :src="image" />
-        </div>
-
-        <div class="form-row">
+    <form id="formPost" class="card-post">
+      <div class="header-box">
+        <h1 class="card-title">Nouveau Post</h1>
+      </div>
+      <div v-if="image != ''" class="image-block">
+        <img :src="image" />
+      </div>
+      <div class="style-li">
+        <div class="mb-3">
+          <label for="title" class="form-label">Titre</label>
           <input
             v-model="title"
             class="form-control"
             name="title"
             id="title"
             type="text"
-            placeholder="Titre"
           />
         </div>
-        <div class="form-row">
-          <textarea
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input
             v-model="description"
             class="form-control"
-            placeholder="Entrez votre message"
+            name="description"
             id="description"
             type="text"
-          ></textarea>
+          />
         </div>
         <div class="form-row">
           <input
@@ -37,28 +38,25 @@
             @change="updatePicture"
             accept="image/png, image/jpg, image/jpeg, image/gif"
           />
-        </div>
-        <div class="form-row">
           <input
             class="validPost"
             type="button"
             value="Choisir une image"
             onclick="document.getElementById('input-image').click();"
-          />
+          /></div><div class="form-row">
           <button @click="submitData" type="button" class="validPost">
             Valider
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
 import { createPost } from "../services/post";
 export default {
-  name: "addPost",
- 
+  name: "AjoutPost",
   data() {
     return {
       image: "",
@@ -97,14 +95,14 @@ export default {
       createPost(formData)
         .then(() => {
           // pour diriger vers la page home
-          this.$router.push("Actualite");
+          this.$router.push("/actualite");
         })
         .catch((err) => {
           console.log("Erreur: " + err);
         });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -125,6 +123,12 @@ export default {
   padding: 16px;
   box-sizing: border-box;
   margin-top: 20px;
+}
+.card-description{
+  display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+    color: black;
 }
 #input-image {
   display: none;

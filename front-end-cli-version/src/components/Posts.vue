@@ -12,100 +12,104 @@
     </div>
     <div v-for="post in posts" :key="post.id" class="container">
       <div>
-        <div class="card-post ">
-          <h5 >{{ post.title }}</h5>
-          <img :src="post.imageUrl" class="card-img-top" :alt="post.title" />
-          
-            <p class="card-text">
+        <div class="card-post">
+          <div>
+            <div class="form-row">
+              <h5>
+                Publié par :{{ post.username }} le
+                {{ dateOfPost(post.createdAt) }}
+              </h5>
+            </div>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <img :src="post.imageUrl" class="card-img-top" :alt="post.title" />
+            
+            <p class="card-description"> Description:
               {{ post.description }}
             </p>
-            <div v-for="comment in comments" :key="comment.id">
-              <div v-if="comment.postId === post.id">
-                <div class="edit-comment mb-3 style-div">
-                  <div
-                    v-bind:id="`comment-${comment.id}`"
-                    style="display: flex"
+          </div>
+          <div v-for="comment in comments" :key="comment.id">
+            <div v-if="comment.postId === post.id">
+              <div class="edit-comment mb-3 style-div">
+                <div class="commented" v-bind:id="`comment-${comment.id}`">
+                  <div>Commenté par: {{ comment.author }}</div>
+                  <div>Le {{ dateOfPost(post.createdAt) }}</div>
+                  <div>Commentaire: {{ comment.comment }}</div>
+                </div>
+                <div class="input-group">
+                  <input
+                    v-bind:id="`comment-${comment.id}-edit`"
+                    type="text"
+                    class="form-control"
+                    name="commentaire"
+                    placeholder="Ecrivez un commentaire"
+                    style="display: none"
+                  />
+                  <button
+                    v-bind:id="`comment-${comment.id}-edit-button`"
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    @click="editComment(comment.id)"
+                    style="display: none"
                   >
-                    <div>Commenté par: {{ comment.author }} </div>
-                   <div>Le {{ dateOfPost(post.createdAt) }}</div>
-                    <div>Commentaire: {{ comment.comment }}</div>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      v-bind:id="`comment-${comment.id}-edit`"
-                      type="text"
-                      class="form-control"
-                      name="commentaire"
-                      placeholder="Ecrivez un commentaire"
-                      style="display: none"
-                    />
-                    <button
-                      v-bind:id="`comment-${comment.id}-edit-button`"
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      @click="editComment(comment.id)"
-                      style="display: none"
-                    >
-                      Envoyer
-                    </button>
-                  </div>
-                  <div class="edit-delete-icon">
-                    <span @click="showEdit(comment.id, comment.comment)">
-                      <i
-                        v-if="userId == comment.authorId || isAdmin === true"
-                        class="fas fa-edit style-icon"
-                      ></i>
-                    </span>
-                    <span @click="deleteComment(comment.id)">
-                      <i
-                        v-if="userId == comment.authorId || isAdmin === true"
-                        class="fas fa-trash-alt style-icon"
-                      ></i
-                    ></span>
-                  </div>
+                    Envoyer
+                  </button>
+                </div>
+                <div class="edit-delete-icon">
+                  <span @click="showEdit(comment.id, comment.comment)">
+                    <i
+                      v-if="userId == comment.authorId || isAdmin === true"
+                      class="fas fa-edit style-icon"
+                    ></i>
+                  </span>
+                  <span @click="deleteComment(comment.id)">
+                    <i
+                      v-if="userId == comment.authorId || isAdmin === true"
+                      class="fas fa-trash-alt style-icon"
+                    ></i
+                  ></span>
                 </div>
               </div>
             </div>
-            <div class="input-group mb-3">
-              <input
-                v-bind:id="`post-${post.id}-input`"
-                type="text"
-                class="form-control"
-                name="commentaire"
-                placeholder="Ecrivez un commentaire"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="button-addon2"
-                @click="addComment(post.id)"
-              >
-                Envoyer
-              </button>
-            </div>
-            <div class="btn-edit-delete-post">
-              <a
-                class="btn btn-warning"
-                v-if="userId == post.userId || isAdmin === true"
-                @click="goToEditPage(post.id)"
-                >Modifier</a
-              >
-              <a
-                class="btn btn-danger"
-                v-if="userId == post.userId || isAdmin === true"
-                @click="deletePost(post.id)"
-                >Supprimer</a
-              >
-            </div>
           </div>
-        
+          <div class="input-group mb-3">
+            <input
+              v-bind:id="`post-${post.id}-input`"
+              type="text"
+              class="form-control"
+              name="commentaire"
+              placeholder="Ecrivez un commentaire"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+              @click="addComment(post.id)"
+            >
+              Envoyer
+            </button>
+          </div>
+          <div class="btn-edit-delete-post">
+            <a
+              class="btn btn-warning"
+              v-if="userId == post.userId || isAdmin === true"
+              @click="goToEditPage(post.id)"
+              >Modifier</a
+            >
+            <a
+              class="btn btn-danger"
+              v-if="userId == post.userId || isAdmin === true"
+              @click="deletePost(post.id)"
+              >Supprimer</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getAllPost,deletePost } from "../services/post";
-import { addComment,deleteComment,updateComment } from "../services/comment";
+import { getAllPost, deletePost } from "../services/post";
+import { addComment, deleteComment, updateComment } from "../services/comment";
 export default {
   name: "Posts",
   data() {
@@ -133,13 +137,19 @@ export default {
     });
   },
   methods: {
-    dateOfPost(date){
-            const event = new Date(date);
-            const opt = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    dateOfPost(date) {
+      const event = new Date(date);
+      const opt = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
 
-            return event.toLocaleDateString('fr-Fr', opt);
-        },
-    
+      return event.toLocaleDateString("fr-Fr", opt);
+    },
+
     goToEditPage(id) {
       this.$router.push({ name: "EditPost", params: { id } });
     },
@@ -198,23 +208,28 @@ export default {
 };
 </script>
 <style lang="scss">
-.container-fluid{
+.container-fluid {
   margin-top: 20px;
 }
-#comment-1{
+.commented {
   display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
 }
-
+.card-description{
+  display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+    color: black;
+}
 .style-div {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.far.fa-edit.post{
-   border-radius: 8px;
+.far.fa-edit.post {
+  border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
   border: none;
