@@ -50,15 +50,15 @@
       </button>
         <div class="form-row">
         <p class="card-subtitle">Tu as déjà un compte</p>
-         <router-link to="/" id="routerLink" class="btn btn-primary btn-props">Se connecter</router-link>
+        <button @click="verifieUser" class="btn btn-primary btn-props">
+              Se connecter
+            </button>
          </div>
       </div>
     </div>
     </div>
   </main>
 </template>
-
-
 <script>
 import { signup } from "../services/user";
 export default {
@@ -101,13 +101,16 @@ export default {
       if (isformValid) {
         signup(data)
           .then(() => {
-            this.$router.push("actualite");
+            this.$router.push("/Actualite");
           })
           .catch((err) => console.log(err));
       } else {
         alert("error");
       }
       // pour s'inscrire
+    },
+    verifieUser() {
+      this.$router.push("/");
     },
     newUser() {
       this.submitted = false;

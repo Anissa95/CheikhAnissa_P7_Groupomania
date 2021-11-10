@@ -43,7 +43,9 @@
             type="button"
             value="Choisir une image"
             onclick="document.getElementById('input-image').click();"
-          /></div><div class="form-row">
+          />
+        </div>
+        <div class="form-row">
           <button @click="submitData" type="button" class="validPost">
             Valider
           </button>
@@ -108,15 +110,14 @@ export default {
 <style lang="scss">
 .validPost {
   margin-left: 10px;
-   border-radius: 8px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
   border: none;
   width: 100%;
   padding: 10px;
-
 }
-.card-post{
+.card-post {
   width: 600px;
   background: white;
   border-radius: 16px;
@@ -124,11 +125,11 @@ export default {
   box-sizing: border-box;
   margin-top: 20px;
 }
-.card-description{
+.card-description {
   display: flex;
-    flex-wrap: wrap;
-    font-size: 18px;
-    color: black;
+  flex-wrap: wrap;
+  font-size: 18px;
+  color: black;
 }
 #input-image {
   display: none;

@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+     <h1 class="card-actualite"> Actualités</h1>
     <div class="button">
       <button
         type="button"
@@ -14,15 +15,14 @@
       <div>
         <div class="card-post">
           <div>
-            <div class="form-row">
-              <h5>
+             <h2 class="card-title">{{ post.title }}</h2>
+            <div class="card-info">
+              <h3>
                 Publié par :{{ post.username }} le
                 {{ dateOfPost(post.createdAt) }}
-              </h5>
+              </h3>
             </div>
-            <h5 class="card-title">{{ post.title }}</h5>
             <img :src="post.imageUrl" class="card-img-top" :alt="post.title" />
-            
             <p class="card-description"> Description:
               {{ post.description }}
             </p>
@@ -31,9 +31,9 @@
             <div v-if="comment.postId === post.id">
               <div class="edit-comment mb-3 style-div">
                 <div class="commented" v-bind:id="`comment-${comment.id}`">
-                  <div>Commenté par: {{ comment.author }}</div>
-                  <div>Le {{ dateOfPost(post.createdAt) }}</div>
-                  <div>Commentaire: {{ comment.comment }}</div>
+                <div class="card-info"> <h3 > Commenté par: {{ comment.author }}<br>
+                  Le {{ dateOfPost(post.createdAt) }}</h3></div>
+                <div> Commentaire: {{ comment.comment }}</div> 
                 </div>
                 <div class="input-group">
                   <input
@@ -41,12 +41,12 @@
                     type="text"
                     class="form-control"
                     name="commentaire"
-                    placeholder="Ecrivez un commentaire"
+                    aria-label="Ecrivez un commentaire"
                     style="display: none"
                   />
                   <button
                     v-bind:id="`comment-${comment.id}-edit-button`"
-                    class="btn btn-outline-secondary"
+                    class="btn btn-secondary"
                     type="button"
                     @click="editComment(comment.id)"
                     style="display: none"
@@ -77,10 +77,10 @@
               type="text"
               class="form-control"
               name="commentaire"
-              placeholder="Ecrivez un commentaire"
+              aria-label="Ecrivez un commentaire"
             />
             <button
-              class="btn btn-outline-secondary"
+              class="btn btn-secondary"
               type="button"
               id="button-addon2"
               @click="addComment(post.id)"
@@ -215,13 +215,23 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: flex-start;
+  text-align: left;
+}
+.card-actualite{
+color:rgb(245, 38, 38);
+font-size:34px;
+font-weight: 800;
 }
 .card-description{
   display: flex;
     flex-wrap: wrap;
     font-size: 18px;
     color: black;
+}
+.card-info h3{
+  font-size: 14px;
+  color: black;
+  display: flex;
 }
 .style-div {
   display: flex;
@@ -253,5 +263,13 @@ export default {
 .edit-delete-icon {
   display: flex;
   gap: 12px;
+}
+.btn-warning,.btn-danger{
+  color:black
+}
+@media screen and (max-width: 599px){
+  .card-post{
+    max-width: 300px;
+  }
 }
 </style>

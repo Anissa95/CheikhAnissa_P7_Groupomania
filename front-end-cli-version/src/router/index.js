@@ -53,7 +53,7 @@ const routes = [{
         beforeEnter: authenticate,
     },
     {
-        path: "/post/:id",
+        path: "/post:id",
         name: "EditPost",
         component: EditPost,
         beforeEnter: authenticate,

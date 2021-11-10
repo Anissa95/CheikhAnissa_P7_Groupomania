@@ -1,12 +1,14 @@
 <template>
-  <div class="container">
-    <h1>Liste des administrateurs</h1>
+<div class="container">
+  <div class="card-user">
+<div>
+    <h1 class="card-title">Les administrateurs</h1>
     <ul class="list-group list">
       <li v-for="admin in admins" v-bind:key="admin.id" class="list-group-item">
-        {{ admin.username }}
+      Nom:{{ admin.username }} et email: {{admin.email}}
       </li>
-    </ul>
-  </div>
+    </ul></div>
+  </div></div>
 </template>
 <script>
 import { getAdmin } from "../services/user";
@@ -24,3 +26,16 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.card-user{
+  max-width: 700px;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+.list-group {
+  width: 100%;
+}
+</style>
