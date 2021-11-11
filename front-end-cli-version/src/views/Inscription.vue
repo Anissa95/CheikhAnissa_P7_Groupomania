@@ -45,12 +45,12 @@
           />
         </div>
 
-        <button @click="saveUser" class="btn btn-success btn-props">
+        <button @click="saveUser" class="btn btn-secondary btn-props">
         S'inscrire
       </button>
         <div class="form-row">
         <p class="card-subtitle">Tu as déjà un compte</p>
-        <button @click="verifieUser" class="btn btn-primary btn-props">
+        <button @click="verifieUser" class="btn btn-secondary btn-props">
               Se connecter
             </button>
          </div>
@@ -101,7 +101,7 @@ export default {
       if (isformValid) {
         signup(data)
           .then(() => {
-            this.$router.push("/Actualite");
+            this.$router.push("/");
           })
           .catch((err) => console.log(err));
       } else {
@@ -190,11 +190,5 @@ main {
   width: 100%;
   padding: 10px;
   transition: 0.4s background-color;
-}
-.card-action {
-  color: #4043f3;
-}
-.card-action:hover {
-  cursor: pointer;
 }
 </style>

@@ -1,11 +1,14 @@
 //Importer sequelize
 const Sequelize = require("sequelize");
+require("dotenv").config();
 
 // Etablir la cnx avec la BD mysql
-const sequelize = new Sequelize("groupomania", "root", "Louise2019*", {
-    host: "localhost",
-    dialect: "mysql",
-});
+const sequelize = new Sequelize(process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD, {
+        host: process.env.DB_HOST,
+        dialect: process.env.DB_DIALECT,
+    });
 // pour tester la cnx
 sequelize
     .authenticate()

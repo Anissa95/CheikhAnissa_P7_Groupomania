@@ -2,8 +2,7 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid position">
-        <a class="navbar-brand" @click="goToWall"
-              title="Actualite">
+        <a class="navbar-brand" @click="goToWall" title="Actualite">
           <div class="logo">
             <img
               alt="logo du réseau groupomania"
@@ -13,23 +12,24 @@
         </a>
         <ul>
           <li>
-            <a   v-if="isLogged === true"
+            <a
+              v-if="isLogged === true"
               @click="goToProfilPage"
               title="Profile"
               class="fas fa-user-circle"
-              
             ></a>
           </li>
           <li>
-            <a  v-if="isAdmin === true  && isLogged === true"
+            <a
+              v-if="isAdmin === true && isLogged === true"
               @click="goToAdminsPage"
               title="Administrateur"
               class="fas fa-user-cog"
             ></a>
           </li>
           <li>
-            <a 
-            v-if="isLogged === true"
+            <a
+              v-if="isLogged === true"
               @click="signout"
               title="Se déconnecter"
               class="fas fa-sign-in-alt"
@@ -40,11 +40,10 @@
     </nav>
   </div>
 </template>
-
 <script>
 export default {
   name: "Nav",
-   computed: {
+  computed: {
     isAdmin() {
       return this.$store.state.user.isAdmin;
     },
@@ -69,7 +68,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss">
 .position {
   position: sticky;
@@ -91,7 +89,6 @@ ul {
   width: 250px;
   justify-content: space-between;
 }
-
 a {
   font-size: 2.5rem;
   padding: 2px 10px;
@@ -99,7 +96,6 @@ a {
   text-decoration: none;
   color: black;
 }
-
 a:hover {
   color: grey;
 }

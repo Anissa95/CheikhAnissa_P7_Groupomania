@@ -5,7 +5,7 @@
     <h1 class="card-title">Les administrateurs</h1>
     <ul class="list-group list">
       <li v-for="admin in admins" v-bind:key="admin.id" class="list-group-item">
-      Nom:{{ admin.username }} et email: {{admin.email}}
+      Nom:{{ admin.username }}
       </li>
     </ul></div>
   </div></div>
@@ -37,5 +37,6 @@ export default {
 }
 .list-group {
   width: 100%;
+  text-align: left;
 }
 </style>

@@ -53,7 +53,6 @@
     </form>
   </div>
 </template>
-
 <script>
 import { getOnePost, updatePost } from "../services/post";
 export default {
@@ -73,7 +72,7 @@ export default {
     });
   },
   methods: {
-    //pour généré l'image choisi par l'utilisateur
+    //Générer l'image choisi par l'utilisateur
     createImage(file) {
       const reader = new FileReader();
       const vm = this;

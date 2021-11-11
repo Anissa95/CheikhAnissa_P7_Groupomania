@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <!-- for new post -->
+    <!-- Nouveau post -->
     <form id="formPost" class="card-post">
       <div class="header-box">
         <h1 class="card-title">Nouveau Post</h1>
@@ -19,7 +19,6 @@
             type="text"
           />
         </div>
-
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
           <input
@@ -54,7 +53,6 @@
     </form>
   </div>
 </template>
-
 <script>
 import { createPost } from "../services/post";
 export default {
@@ -96,7 +94,7 @@ export default {
       // création d'un nouveau post
       createPost(formData)
         .then(() => {
-          // pour diriger vers la page home
+          // pour diriger vers la page d'actualite
           this.$router.push("/actualite");
         })
         .catch((err) => {
@@ -106,7 +104,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss">
 .validPost {
   margin-left: 10px;
@@ -118,7 +115,7 @@ export default {
   padding: 10px;
 }
 .card-post {
-  width: 600px;
+  width: 800px;
   background: white;
   border-radius: 16px;
   padding: 16px;
