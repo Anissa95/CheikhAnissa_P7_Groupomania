@@ -269,6 +269,7 @@ export default {
 }
 .style-icon {
   cursor: pointer;
+  color:black;
 }
 .form-control {
   margin-bottom: 10px;

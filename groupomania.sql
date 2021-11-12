@@ -30,8 +30,13 @@ CREATE TABLE `comments` (
   `comment` varchar(2000) NOT NULL DEFAULT '',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `userId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `postId` (`postId`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +45,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Alex',2,1,'Super!!!!','2021-11-11 15:38:11','2021-11-11 15:38:11'),(2,'Louise',3,1,'Wahh c\'est genial!!!','2021-11-11 15:52:31','2021-11-11 15:52:31'),(3,'anissa',1,2,'C\'est intéressant !!!','2021-11-11 15:59:07','2021-11-11 15:59:07');
+INSERT INTO `comments` VALUES (1,'Alex',3,1,'C\'est très intéressant!!!!','2021-11-12 18:54:36','2021-11-12 18:54:36',NULL),(2,'Louise',2,1,'parfait!!!','2021-11-12 18:56:30','2021-11-12 18:56:30',NULL),(3,'Louise',2,2,'Intéressant !!!','2021-11-12 18:56:55','2021-11-12 18:56:55',NULL),(4,'Anissa',1,3,'Super!!!!','2021-11-12 19:03:02','2021-11-12 19:03:02',NULL);
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,10 +62,12 @@ CREATE TABLE `posts` (
   `title` varchar(200) NOT NULL DEFAULT '',
   `username` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(2000) NOT NULL DEFAULT '',
-  `imageUrl` varchar(2000) DEFAULT NULL,
+  `imageUrl` varchar(2000) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,7 +77,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,1,'Et si vous vous évadez en république dominicaine','anissa','DES SÉJOURS HAUT DE GAMME NÉGOCIÉS PAR VOYAGE PRIVÉ JUSQU\'À -70%','http://localhost:3000/images/RépubliqueDominicaine.png1636644836741.png','2021-11-11 15:33:56','2021-11-11 15:56:13'),(2,2,'OpenClassRooms','Alex','OpenClassrooms est un site web de formation en ligne, créé en 1999 sous le nom de Site du Zéro','http://localhost:3000/images/download.jpg1636645078583.jpg','2021-11-11 15:37:58','2021-11-11 15:50:33'),(3,4,'Pc ','louis','Ordinateur de qualité','http://localhost:3000/images/a573108a-3474-41c6-a192-c94b3ce1aec6.jpg1636646448180.jpg','2021-11-11 16:00:48','2021-11-11 16:00:48');
+INSERT INTO `posts` VALUES (1,1,'République dominicaine','Anissa','Un hôtel en front de mer, des prestations modernes, de nombreux restaurants...','http://localhost:3000/images/RépubliqueDominicaine.png1636743207986.png','2021-11-12 18:53:28','2021-11-12 18:53:28'),(2,3,'Formation intéressante ','Alex','OpenClassrooms est un site web de formation en ligne, créé en 1999 sous le nom de Site du Zéro.','http://localhost:3000/images/download.jpg1636743350644.jpg','2021-11-12 18:55:50','2021-11-12 18:55:50'),(3,4,'30 activités Ã  faire avec les enfants quelle que soit la saison','Louis','Jeux, coloriages, bricolages. Ces activités pour enfants sont réalisables chez vous en toutes circonstances.https://www.momes.net/les-tops-des-momes/top-des-momes-bricolage-diy/30-activites-a-faire-avec-les-enfants-quelle-que-soit-la-saison-875278','http://localhost:3000/images/coloriage.PNG1636743737336.png','2021-11-12 19:02:17','2021-11-12 19:02:17');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +107,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'anissa','843ff3665b6effe0cedbe23b3d95faad6a6dfbcc6354eb1374c956c295704156','$2b$10$TYH.WuBzDAZHrBvdWPnRU.KDNGcgXCDm.lyN5BDRLUnc.AosZtODW',1,'2021-11-11 15:30:59','2021-11-11 15:30:59'),(2,'Alex','cdd2b8c8921b2fb0be2ee13824e220d00fecebdbe6a108a97c9110212c9cea56','$2b$10$JUieACGv8Ua1LDsPRJroBeLcLQirahkxYWHl8pbZAzRGa17Pdzz/m',0,'2021-11-11 15:36:25','2021-11-11 15:36:25'),(3,'Louise','916d5a9c2e6558757cf813aba2b1d91c09489a260a0d57d5e5f10893e8560c39','$2b$10$XktHw10v.TvfMiaIi3vjPeVCBri2VhxlaBO/DTG3oMD1/1hPv2sye',0,'2021-11-11 15:51:29','2021-11-11 15:51:29');
+INSERT INTO `users` VALUES (1,'Anissa','843ff3665b6effe0cedbe23b3d95faad6a6dfbcc6354eb1374c956c295704156','$2b$10$XK9zqIbU26nIgf.CqJ1nV./lZerValDvKZsCi/Ekxo4eiLmJLs15m',1,'2021-11-12 18:45:09','2021-11-12 18:45:09'),(2,'Louise','916d5a9c2e6558757cf813aba2b1d91c09489a260a0d57d5e5f10893e8560c39','$2b$10$L4139PIMyN3l5FurIxrtlueUkkfXaZhEk6bJnwr2746z5pTC0eF9.',0,'2021-11-12 18:45:40','2021-11-12 18:45:40'),(3,'Alex','a969e71589db23445e5e7528da78bb84976ffea13e97c3ce6e86bfe9b6490e61','$2b$10$L3BQHXGVRGtewa87Q.aGwe8DicOFKoucO9IPeGtJNV7Vyxyp9pViG',0,'2021-11-12 18:46:02','2021-11-12 18:46:02'),(4,'Louis','3fd5b42fe98b16782a3402b72b99317abecdd6134626e6e7efa4754fbb86d88e','$2b$10$AeVZzy.W2.v/B6MkMopkGucsbgj3coqcLaUKYfu1L2Bvn.XJbqLsO',0,'2021-11-12 18:48:19','2021-11-12 18:48:19');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -113,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-11 18:10:07
+-- Dump completed on 2021-11-12 20:04:31
