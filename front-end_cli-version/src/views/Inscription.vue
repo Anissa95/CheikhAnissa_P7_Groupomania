@@ -40,12 +40,12 @@
             name="password"
           />
         </div>
-        <button @click="saveUser" class="btn btn-secondary btn-props">
+        <button @click="saveUser" class="btn  btn-connex">
         S'inscrire
       </button>
         <div class="form-row">
         <p class="card-subtitle">Tu as déjà un compte</p>
-        <button @click="verifieUser" class="btn btn-secondary btn-props">
+        <button @click="verifieUser" class="btn  btn-connex">
               Se connecter
             </button>
          </div>
@@ -123,7 +123,7 @@ main {
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .form-row {
   display: flex;
@@ -166,7 +166,7 @@ main {
   font-weight: 500;
 }
 .btn {
-  color: white;
+  color: black;
   border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
@@ -174,5 +174,8 @@ main {
   width: 100%;
   padding: 10px;
   transition: 0.4s background-color;
+}
+.btn-connex{
+  background: rgb(214, 96, 96);
 }
 </style>

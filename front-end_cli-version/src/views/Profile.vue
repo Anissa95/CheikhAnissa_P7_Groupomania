@@ -20,7 +20,7 @@
             placeholder="Entrez votre mot de passe"
           /></div>
           <div class="form-row"> 
-          <button class="btn btn-danger" @click="deleteAccount">
+          <button class="btn btn-connex" @click="deleteAccount">
             Supprimer compte
           </button>
         </div>

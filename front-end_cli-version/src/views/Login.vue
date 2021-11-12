@@ -29,14 +29,14 @@
             />
           </div>
           <div class="form-row">
-            <button @click="verifieUser" class="btn btn-secondary btn-props">
+            <button @click="verifieUser" class="btn  btn-connex">
               Se connecter
             </button>
           </div>
 
           <div class="form-row">
             <p class="card-subtitle">Tu n'as pas encore de compte ?</p>
-            <button @click="goToRegister" class="btn btn-secondary btn-props">
+            <button @click="goToRegister" class="btn  btn-connex">
               S'inscrire
             </button>
           </div>

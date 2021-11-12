@@ -46,7 +46,7 @@
         />
       </div>
       <div class="form-row">
-        <button @click="submitData" type="button" class="validPost">
+        <button @click="submitData" type="button" class="btn btn-connex">
           Valider
         </button>
       </div>

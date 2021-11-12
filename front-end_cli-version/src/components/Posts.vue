@@ -93,7 +93,7 @@
             />
             <br />
             <button
-              class="btn btn-secondary"
+              class="btn btn-connex"
               type="button"
               id="button-addon2"
               @click="addComment(post.id)"
@@ -103,13 +103,13 @@
           </div>
           <div class="btn-edit-delete-post">
             <a
-              class="btn btn-secondary"
+              class="btn btn-connex"
               v-if="userId == post.userId"
               @click="goToEditPage(post.id)"
               >Modifier</a
             >
             <a
-              class="btn btn-secondary"
+              class="btn btn-connex"
               v-if="userId == post.userId || isAdmin === true"
               @click="deletePost(post.id)"
               >Supprimer</a
