@@ -8,10 +8,10 @@ import Profile from "../views/Profile.vue";
 import Admins from "../views/Admin.vue";
 import store from "../store";
 
-// pour garder la session ouverte de l'utilisateur, on crée authenticate pour verifier la présence ou pas du token dans localstorage
+// Afin de garder la session ouverte de l'utilisateur, on crée authenticate pour verifier la présence ou pas du token dans localstorage
 const authenticate = (to, from, next) => {
     store.state.user.isLogged = true;
-    // fct pour se déconnecter
+    // Fonction pour se déconnecter
     function logout() {
         if (localStorage.getItem("token")) {
             localStorage.removeItem("token");
@@ -19,18 +19,16 @@ const authenticate = (to, from, next) => {
         store.state.user.isLogged = false;
         next("/");
     }
-    //  si pas de token on se déconnecte
+    //  Si  y a pas de token on se déconnecte
     if (!localStorage.getItem("token")) {
         logout();
         return;
     }
-    //  si token on se redirige vers home
-
+    //  si token on se redirige vers mur d'actualité
     if (localStorage.getItem("token")) {
         next();
     } else next("/");
 };
-
 const routes = [{
         path: '/',
         name: 'Login',

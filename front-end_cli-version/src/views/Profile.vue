@@ -17,7 +17,7 @@
             class="form-control"
             id="password"
             name="password"
-            placeholder="Ecrivez votre mot de passe"
+            placeholder="Entrez votre mot de passe"
           /></div>
           <div class="form-row"> 
           <button class="btn btn-danger" @click="deleteAccount">
@@ -53,7 +53,7 @@ export default {
           this.$store.dispatch("signout").then(() => {
             // on redirige le user vers la vue Login et un message apparait
             this.$router.push("/");
-            alert("compte supprimé");
+            alert("Votre compte est bien supprimé");
           });
         })
         .catch((err) => console.log(err));
@@ -62,7 +62,6 @@ export default {
 };
 </script>
 <style lang="scss">
-
 .margin {
   margin-bottom: 20px;
 }

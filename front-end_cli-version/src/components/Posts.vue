@@ -28,10 +28,7 @@
               {{ post.description }}
             </p>
           </div>
-          <div
-            v-for="comment in comments"
-            :key="comment.id"
-          >
+          <div v-for="comment in comments" :key="comment.id">
             <div v-if="comment.postId === post.id">
               <div class="edit-comment mb-3 style-div">
                 <div class="commented" v-bind:id="`comment-${comment.id}`">
@@ -41,8 +38,10 @@
                       Le {{ dateOfComment(comment.createdAt) }}
                     </h3>
                   </div>
-                  <div>Commentaire: {{ comment.comment }} <hr></div>
-
+                  <div>
+                    Commentaire: {{ comment.comment }}
+                    <hr />
+                  </div>
                 </div>
                 <div class="input-group">
                   <input
@@ -143,7 +142,7 @@ export default {
       return this.$store.state.user.userId;
     },
   },
-  // après que le composant soit chargé, on exécute tout ce qui est à l'intérieur de la fct mounted
+  // Après que le composant soit chargé, on exécute tout ce qui est à l'intérieur de la fct mounted
   mounted() {
     getAllPost().then((response) => {
       this.posts = response.data.result.posts;
@@ -241,7 +240,7 @@ export default {
   text-align: left;
 }
 .card-actualite {
-  color: rgb(245, 38, 38);
+  color: rgb(12, 12, 82);
   font-size: 34px;
   font-weight: 800;
 }
@@ -264,7 +263,7 @@ export default {
 .far.fa-edit.post {
   border-radius: 8px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   padding: 10px;
 }

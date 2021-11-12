@@ -11,13 +11,11 @@ export default {
   name: "App",
   components: {
     Nav
-    
   },
-  // on ajoute une condition si token présent dans le localstorage on dispatch la fct getuser qui se trouve dans store
+  // On ajoute une condition si token présent dans le localstorage on dispatch la fct getuser qui se trouve dans store
   mounted() {
     if (localStorage.getItem("token")) this.$store.dispatch("getUser");
   },
-  
 };
 </script>
 
@@ -34,7 +32,7 @@ export default {
 body {
   height: 100%;
   margin: 0;
-  background: url(./assets/image_fond.jpg) no-repeat 50% 0% fixed;
+  background: url(./assets/image_fond.png) no-repeat 50% 0% fixed;
   width: 100%;
   background-size: cover;
 }

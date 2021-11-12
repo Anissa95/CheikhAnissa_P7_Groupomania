@@ -6,7 +6,7 @@
           <div class="logo">
             <img
               alt="logo du réseau groupomania"
-              src="../assets/icon-above-font.svg"
+              src="../assets/icon-left-font-monochrome-white.png"
             />
           </div>
         </a>
@@ -73,13 +73,22 @@ export default {
   position: sticky;
   top: 0;
 }
+.logo img {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+}
 .navbar {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  background: white;
+  background:rgb(50, 50, 105);
   padding: 0;
 }
 ul {
@@ -96,7 +105,22 @@ a {
   text-decoration: none;
   color: black;
 }
+.fas{
+  color:white;
+}
 a:hover {
-  color: grey;
+  color: rgb(223, 139, 139);
+}
+@media screen and (max-width: 600px) {
+.logo img {
+    height: 50px;
+  }
+  .container-fluid.position{
+  display: flex;
+  justify-content: space-around;
+}
+a{
+font-size: 2rem;
+}
 }
 </style>

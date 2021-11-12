@@ -66,7 +66,7 @@ export default {
     };
   },
   methods: {
-    //pour générer l'image sélectionnée par l'utilisateur
+    //Générer l'image sélectionnée par l'utilisateur
     createImage(file) {
       const reader = new FileReader();
       const vm = this;
@@ -75,7 +75,7 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    // téléchargement de l'image
+    // Téléchargement de l'image
     updatePicture(e) {
       const file = e.target.files || e.dataTransfer.files;
       if (!file.length) {
@@ -91,10 +91,10 @@ export default {
       }
       let formData = {};
       formData = new FormData(document.getElementById("formPost"));
-      // création d'un nouveau post
+      // Création d'un nouveau post
       createPost(formData)
         .then(() => {
-          // pour diriger vers la page d'actualite
+          // Se diriger vers la page d'actualite
           this.$router.push("/actualite");
         })
         .catch((err) => {

@@ -1,50 +1,45 @@
 <template>
   <main>
-    <!--div class="logo">
-      <img
-        alt="logo du réseau groupomania"
-        src="../assets/icon-above-font.svg"
-      />
-    </div-->
     <div class="container">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title">Connexion</h1>
+        <h1 class="card-title">Inscription</h1>
         <div class="form-row">
-          <label for="email">Email</label>
           <input
             type="email"
            class="form-row_input"
             id="email"
             required
+            aria-label="email"
+            placeholder="Adresse email"
             v-model="user.email"
             name="email"
           />
         </div>
-
         <div class="form-row">
-          <label for="username">Username</label>
           <input
             type="username"
             class="form-row_input"
             id="username"
             required
+            aria-label="username"
+            placeholder="Nom"
             v-model="user.username"
             name="username"
           />
         </div>
         <div class="form-row">
-          <label for="password">Password</label>
           <input
             type="password"
            class="form-row_input"
             id="password"
             required
+            aria-label="password"
+            placeholder="Mot de passe"
             v-model="user.password"
             name="password"
           />
         </div>
-
         <button @click="saveUser" class="btn btn-secondary btn-props">
         S'inscrire
       </button>
@@ -75,7 +70,6 @@ export default {
       alertMsg: "",
     };
   },
-  
   methods: {
     // Verification des inputs username, email et MDP lors de l'inscription
     validForm() {
@@ -83,7 +77,7 @@ export default {
         "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
         "g"
       );
-      // tester l'expression regex
+      // Tester l'expression regex
       let testUsername = this.user.username.length > 0;
       let testEmail = emailRegExp.test(this.user.email);
       let testPassword = this.user.password.length > 5;
@@ -105,9 +99,9 @@ export default {
           })
           .catch((err) => console.log(err));
       } else {
-        alert("error");
+        alert("Veuillez renseignez tous les champs SVP!!");
       }
-      // pour s'inscrire
+      // S'inscrire
     },
     verifieUser() {
       this.$router.push("/");
@@ -153,16 +147,6 @@ main {
 .form-row_input::placeholder {
   color: #aaaaaa;
 }
-.logo {
-  display: flex;
-  justify-content: center;
-  background: white;
-}
-.logo img {
-  width: 200px;
-  height: 100px;
-  object-fit: cover;
-}
 .card {
   width: 400px;
   background: white;
@@ -174,7 +158,7 @@ main {
 .card-title {
   text-align: center;
   font-weight: 800;
-  color: rgb(245, 22, 22);
+  color:rgb(19, 19, 85);
 }
 .card-subtitle {
 

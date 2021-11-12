@@ -1,33 +1,29 @@
 <template>
   <main>
-    <!--div class="logo">
-      <img
-        alt="logo du réseau groupomania"
-        src="../assets/icon-above-font.svg"
-      />
-    </div-->
     <div class="container">
       <div class="card">
         <div class="card-body">
           <h1 class="card-title">Connexion</h1>
           <div class="form-row">
-            <label for="email">Email</label>
             <input
               type="email"
               class="form-row_input"
               id="email"
               required
+              aria-label="email"
+            placeholder="Adresse email"
               v-model="user.email"
               name="email"
             />
           </div>
           <div class="form-row">
-            <label for="password">Password</label>
             <input
               type="password"
               class="form-row_input"
               id="password"
               required
+              aria-label="password"
+              placeholder="Mot de passe"
               v-model="user.password"
               name="password"
             />
@@ -81,9 +77,9 @@ export default {
             this.$store.state.user.islogged = true;
             this.$router.push("/actualite"); //push() pour la redirection vers le mur 
           })
-          .catch(() => alert("email ou mot de passe incorrect"));
+          .catch(() => alert("Email ou mot de passe incorrect"));
       } else {
-        alert("error");
+        alert("Veuillez remplir tous les champs!!");
       }
     },
     goToRegister() {
@@ -102,6 +98,4 @@ export default {
   },
 };
 </script>
-
-
 <style lang="scss"></style>
