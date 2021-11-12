@@ -24,4 +24,11 @@ db.user = require("./User.js")(sequelize, Sequelize);
 db.comment = require("./Comment.js")(sequelize, Sequelize);
 db.post = require("./Post.js")(sequelize, Sequelize);
 
+//------------------Création des clé étrangère----------------------
+db.user.hasMany(db.post);
+db.post.belongsTo(db.user);
+
+db.post.hasMany(db.comment);
+db.comment.belongsTo(db.post);
+
 module.exports = db;
