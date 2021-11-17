@@ -11,19 +11,28 @@ const Op = db.Sequelize.Op;
 exports.signup = (req, res, next) => {
     //Chiffrer l'email avant l'envoi a la BD
     const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
-    bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-            const user = {
-                username: req.body.username,
-                email: emailCryptoJs,
-                password: hash,
-                isAdmin: false,
-            };
-            db.user
-                .create(user)
-                .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-                .catch((error) => res.status(400).json({ error }));
+    db.user
+        .findOne({ where: { email: emailCryptoJs } })
+        .then((user) => {
+            if (!user) {
+                return res.status(401).json({ error: "Adresse email déja utilisée!" });
+
+            }
+            bcrypt
+                .hash(req.body.password, 10)
+                .then((hash) => {
+                    const user = {
+                        username: req.body.username,
+                        email: emailCryptoJs,
+                        password: hash,
+                        isAdmin: false,
+                    };
+                    db.user
+                        .create(user)
+                        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+                        .catch((error) => res.status(400).json({ error }));
+                })
+                .catch((error) => res.status(500).json({ error }));
         })
         .catch((error) => res.status(500).json({ error }));
 };

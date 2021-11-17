@@ -7,7 +7,7 @@
           <li class="list-group-item margin">
             Nom d'utilisateur: {{ user.username }}
           </li>
-          <li class="list-group-item margin ">Email: {{ user.email }}</li>
+         <!-- <li class="list-group-item margin ">Email: {{ user.email }}</li>-->
         </ul>
         <div class="input-group mb-3">
           <label for="password">Mot de passe:</label>

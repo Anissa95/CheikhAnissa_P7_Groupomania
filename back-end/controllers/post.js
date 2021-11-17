@@ -6,7 +6,12 @@ require('dotenv').config();
 // Lire tous les posts avec leurs comments
 exports.getAllPost = (req, res, next) => {
     db.post
-        .findAll()
+        .findAll({
+            order: [
+                ['createdAt', 'DESC'],
+
+            ]
+        })
         .then((posts) => {
             db.comment.findAll().then((comments) => {
                 // retourne un objet json result contenant des posts et des comments
